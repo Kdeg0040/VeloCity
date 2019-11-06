@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import ls from 'local-storage';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash} from '@fortawesome/free-solid-svg-icons'
+
 
 class BikePart extends Component {
   constructor(props) {
@@ -30,6 +33,8 @@ class BikePart extends Component {
 
   render() {
     const { part } = this.props
+    const trashIcon = <FontAwesomeIcon icon={faTrash} />
+
     function percentWorn(part) {
       return (( part.distance_done / part.max_distance ) * 100).toFixed()
     }
@@ -47,17 +52,16 @@ class BikePart extends Component {
   };
 
   return (
-    <div><div style={wornColour(part)}>Component: {part.comp_name} <br/>
-    Distance done:{part.distance_done}m <br/>
-    Recommended maximum: {part.max_distance}m <br/>
-    Percentage worn: { percentWorn(part) }%</div>
-    <div><button onClick={this.deletePart}>Delete</button></div>
-
-
-
-
-
-
+    <div>
+      <div style={wornColour(part)}>
+        Component: {part.comp_name} <br/>
+        Distance done:{part.distance_done}m <br/>
+        Recommended maximum: {part.max_distance}m <br/>
+        Percentage worn: { percentWorn(part) }%
+      </div>
+      <div>
+        <button onClick={this.deletePart}>{trashIcon}</button>
+      </div>
     </div>
   )};
 }
