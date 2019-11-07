@@ -1,7 +1,5 @@
 
 class Api::V1::StravaController < ApplicationController
-  # TODO need to check this line isn't dangerous.  Fixed it falling over with
-  # "Can't verify CSRF token authenticity." Error
   before_action :check_login, only: %i[find_bikes refresh_bikes]
   protect_from_forgery with: :null_session
 
@@ -18,7 +16,6 @@ class Api::V1::StravaController < ApplicationController
   def destroy
   end
 
-  # Newly Authorised User - update all fields on table
   def authorize
     response = RestClient.post 'https://www.strava.com/oauth/token', { client_id: '40250', client_secret: '700b02392cd20d926d066de6a28601acb90772a8', code: params["code"], grant_type: 'authorization_code' }
     json = JSON.parse(response)
@@ -27,7 +24,6 @@ class Api::V1::StravaController < ApplicationController
     redirect_to root_url
   end
 
-  # Called to find all bikes used in the last period of time
   def find_bikes
     user_id = params["user_id"]
     bike_ids = get_bike_ids(user_id)
@@ -39,7 +35,6 @@ class Api::V1::StravaController < ApplicationController
     render json: { new_bikes: bikes }
   end
 
-  # Calls Strava and refreshes bike milage with results
   def refresh_bikes
     bike_ids = params["bike_ids"].split(',')
     user_id = params["user_id"]
@@ -67,7 +62,6 @@ class Api::V1::StravaController < ApplicationController
     end
   end
 
-  # Gets a unique list of bike ID's
   def get_bike_ids(user_id)
     user = User.find_by(id: user_id)
     authorize_time_check(user)
@@ -82,7 +76,6 @@ class Api::V1::StravaController < ApplicationController
     bike_ids
   end
 
-  # Gets the name and milage for a specific bike
   def get_bike(bikeID, userID)
     user = User.find_by(id: userID)
     authorize_time_check(user)
@@ -90,7 +83,6 @@ class Api::V1::StravaController < ApplicationController
     bike = JSON.parse(response)
   end
 
-  # Checks that the users authorisation code hasn't expired
   def authorize_time_check(user)
 
     if (user.access_token_expiry < Time.now)
@@ -98,7 +90,6 @@ class Api::V1::StravaController < ApplicationController
     end
   end
 
-  # If required, gets new authorisation code and refresh token
   def refresh_authorisation(user)
     response = RestClient.post 'https://www.strava.com/api/v3/oauth/token', { client_id: '40250', client_secret: '700b02392cd20d926d066de6a28601acb90772a8', grant_type: 'refresh_token', refresh_token: user.refresh_token }
     json = JSON.parse(response)

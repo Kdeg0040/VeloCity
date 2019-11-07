@@ -5,7 +5,6 @@ class BikePart extends Component {
   constructor(props) {
     super(props);
     const { part } = props
-    // this.state = {id: ""}
     this.deletePart = this.deletePart.bind(this);
   }
 
@@ -18,8 +17,6 @@ class BikePart extends Component {
             })
           .then(response => {
             if (response.ok) {
-                    // return response.json();
-              console.log(response)
             }else{
               throw new Error("Network response was not ok.");
               }
@@ -52,12 +49,6 @@ class BikePart extends Component {
     Recommended maximum: {part.max_distance}m <br/>
     Percentage worn: { percentWorn(part) }%</div>
     <div><button onClick={this.deletePart}>Delete</button></div>
-
-
-
-
-
-
     </div>
   )};
 }

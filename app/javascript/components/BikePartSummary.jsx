@@ -33,9 +33,6 @@ class BikePartSummary extends React.Component {
         };
       });
 
-      console.log(bikeObject)
-      console.log(partsArray)
-
       return (
         <div>
         <div>

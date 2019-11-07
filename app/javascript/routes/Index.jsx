@@ -22,6 +22,3 @@ export default (
         </Switch>
     </Router>
 );
-
-// TODO check whether it should be exact path "/" component or <Route path="/recipes" exact component={Recipes} />
-// TODO path="/bikes" means that because this isn't exact it path it will always load the component under that url
