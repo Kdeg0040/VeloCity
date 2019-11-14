@@ -36,7 +36,8 @@
     "webpack-dev-server": "^3.9.0"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "rails s"
   },
   "jest": {
     "testPathIgnorePatterns": [
