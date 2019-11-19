@@ -55,7 +55,7 @@ const useStyles = makeStyles(theme => ({
 export default function SignUp() {
   const classes = useStyles();
   var currentURL = window.location.origin;
-  const stravaURL = 'http://www.strava.com/oauth/authorize?client_id=40250&response_type=code&redirect_uri=' + currentURL + '/api/v1/strava/authorize/' + ls.get("user_id") + '&scope=read,activity:read,activity:read_all&approval_prompt=force'
+  const stravaURL = 'http://www.strava.com/oauth/authorize?client_id=40926&response_type=code&redirect_uri=' + currentURL + '/api/v1/strava/authorize/' + ls.get("user_id") + '&scope=read,activity:read,activity:read_all&approval_prompt=force'
 
   return (
     <Container component="main" maxWidth="xs">
