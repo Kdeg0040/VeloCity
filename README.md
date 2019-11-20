@@ -1,4 +1,5 @@
 # VeloCity - README
+## See it in action here: [VeloCity](https://velocity-components-tracker.herokuapp.com)
 
 ## What the App has been written for
 This application works hand in hand with the Activity Logging site Strava.  The problem we have solved is that knowing how far your bike has ridden does not help you judge whether the components on the bike need replacing.
